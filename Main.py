@@ -15,7 +15,8 @@ def create_window(theme):
         sg.Text('D_point', size=text_size2), sg.Input('12.5', key='D_point', size=input_size2)],
         [sg.Text('C_point', size=text_size2), sg.Input('15', key='C_point', size=input_size2),
         sg.Text('B_point', size=text_size2), sg.Input('17.5', key='B_point', size=input_size2),
-        sg.Text('A_point', size=text_size2), sg.Input('20', key='A_point', size=input_size2)]
+        sg.Text('A_point', size=text_size2), sg.Input('20', key='A_point', size=input_size2)],
+        [sg.Button('Reset')]
     ]
 
     tab_grades_layout = [
@@ -51,6 +52,9 @@ while True:
     if event == sg.WIN_CLOSED:
         break
 
+    if event == 'E_input':
+        window.close()
+        
     if event == 'Update':
         
         F_points = float(values['F_point'])
@@ -76,5 +80,9 @@ while True:
         
         total_merit = sum(grade_points * grade_value for grade_points, grade_value in zip(current_num, Points))
         window['-merit-'].update(f'{total_merit:.1f}')
+        
+    if event == 'Reset':
+        window.close()
+        window = create_window('SandyBeach') 
     
 window.close()
